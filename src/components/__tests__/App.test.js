@@ -1,17 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { shallow } from 'enzyme' //render instance of component but none of its children(React child), divs, etc will render tho
 import App from '../App'
+import CommentBox from '../CommentBox'
+import CommentList from '../CommentList'
 
 it('shows a comment box', () => {
-  //create CommentBox
-  const div = document.createElement('div')
-
-  ReactDOM.render(<App />, div)
-
-
-  // expect(div.innerHTML).toContain('<CommentBox />') NO inner html thats dumb and cross components
-  // expect(div).toHaveAnInstanceOf(CommentBox)
-
-  //clean up after test runs, or the div stays around even after test runs and slowly they accumulate as long as the test server is running
-  ReactDOM.unmountComponentAtNode(div)
+  const wrapped = shallow(<App />)
+  expect(wrapped.find(CommentBox).length).toEqual(1)
+})
+it('shows a comment list', () => {
+  const wrapped = shallow(<App />)
+  expect(wrapped.find(CommentList).length).toEqual(1)
 })
