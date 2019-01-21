@@ -6,7 +6,8 @@ import Root from 'Root'
 let wrapped
 
 beforeEach(() => {
-  wrapped = mount(<Root><CommentList /></Root>)
+  const initialState = { comments: ['Comment 1', 'Comment 2'] }
+  wrapped = mount(<Root initialState={initialState}><CommentList /></Root>)
 })
 
 afterEach(() => {
@@ -16,9 +17,9 @@ afterEach(() => {
 describe('', () => {
 
   it('should produce an li element for every comment in state', () => {
-
+    expect(wrapped.find('li').length).toEqual(2)
   })
   it('should have visible comment text from each comment', () => {
-
+    expect(wrapped.find('li').first().text()).toEqual('Comment 1')
   })
 })
